@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUGIWARA TV</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #090b10;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #11141c;
+}
+
+.logo {
+  color: #ff3939;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+}
+
+.hero {
+  padding: 65px 25px;
+  background: linear-gradient(120deg, #251126, #101c30, #090b10);
+}
+
+.hero h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  color: #bbb;
+  margin-bottom: 25px;
+}
+
+.btn {
+  background: #ff3939;
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+section {
+  padding: 25px 18px;
+}
+
+section h2 {
+  margin-bottom: 20px;
+}
+
+.search {
+  width: 100%;
+  padding: 14px;
+  background: #191d27;
+  border: 1px solid #333;
+  border-radius: 8px;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.card {
+  background: #171b25;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.poster {
+  height: 145px;
+  background: linear-gradient(135deg, #382044, #182d47);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: #ff7777;
+}
+
+.card h3 {
+  padding: 12px;
+  font-size: 15px;
+}
+
+.card p {
+  padding: 0 12px 12px;
+  color: #aaa;
+  font-size: 12px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #777;
+  background: #11141c;
+}
+
+@media (min-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">MUGIWARA TV</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#anime">Anime</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <h1>YOUR ANIME WORLD</h1>
+  <p>Discover your next anime adventure.</p>
+  <a href="#anime">
+    <button class="btn">Explore Anime</button>
+  </a>
+</div>
+
+<section id="anime">
+  <h2>Explore Anime</h2>
+
+  <input
+    class="search"
+    id="search"
+    type="search"
+    placeholder="Search anime..."
+  >
+
+  <div class="grid" id="animeGrid">
+
+    <div class="card">
+      <div class="poster">ANIME 01</div>
+      <h3>Anime Title 01</h3>
+      <p>Adventure • Action</p>
+    </div>
+
+    <div class="card">
+      <div class="poster">ANIME 02</div>
+      <h3>Anime Title 02</h3>
+      <p>Fantasy • Drama</p>
+    </div>
+
+    <div class="card">
+      <div class="poster">ANIME 03</div>
+      <h3>Anime Title 03</h3>
+      <p>Action • Mystery</p>
+    </div>
+
+    <div class="card">
+      <div class="poster">ANIME 04</div>
+      <h3>Anime Title 04</h3>
+      <p>Adventure • Fantasy</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 MUGIWARA TV</p>
+  <p>Anime lives here.</p>
+</footer>
+
+<script>
+const search = document.getElementById("search");
+
+search.addEventListener("input", function() {
+  const value = this.value.toLowerCase();
+
+  document.querySelectorAll(".card").forEach(card => {
+    card.style.display =
+      card.innerText.toLowerCase().includes(value)
+      ? "block" : "none";
+  });
+});
+</script>
+
+</body>
+  </html>
+  
