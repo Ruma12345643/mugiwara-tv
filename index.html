@@ -189,9 +189,30 @@ footer {
     
 
   
-});
-</script>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 MUGIWARA TV</p>
+        <p>Anime lives here.</p>
+    </footer>
+
+    <script>
+        const search = document.getElementById("search");
+
+        search.addEventListener("input", function () {
+            const value = search.value.toLowerCase().trim();
+
+            document.querySelectorAll(".card").forEach(function (card) {
+                card.style.display =
+                    card.innerText.toLowerCase().includes(value)
+                    ? "block"
+                    : "none";
+            });
+        });
+    </script>
 
 </body>
-  </html>
-  
+      </html>
+
