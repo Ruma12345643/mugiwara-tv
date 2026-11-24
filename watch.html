@@ -1,1 +1,217 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUGIWARA TV - Watch</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #090b10;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #11141c;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: #ff3939;
+  font-size: 23px;
+  font-weight: bold;
+}
+
+header a {
+  color: white;
+  text-decoration: none;
+}
+
+main {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.player {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 1px solid #292d38;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #000;
+}
+
+h2 {
+  margin: 20px 0 10px;
+}
+
+.info {
+  color: #aaa;
+  margin-bottom: 20px;
+}
+
+.episodes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.episode {
+  background: #191d27;
+  color: white;
+  padding: 14px 5px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.episode.active {
+  background: #ff3939;
+  border-color: #ff3939;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.controls button {
+  flex: 1;
+  padding: 13px;
+  background: #ff3939;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.controls button:disabled {
+  opacity: 0.4;
+}
+
+.note {
+  color: #888;
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+@media(max-width: 500px) {
+  main { padding: 14px; }
+  .episodes { grid-template-columns: repeat(3, 1fr); }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">MUGIWARA TV</div>
+  <a href="index.html">Home</a>
+</header>
+
+<main>
+
+  <div class="player">
+    <video id="videoPlayer" controls playsinline></video>
+  </div>
+
+  <h2 id="episodeTitle">One Piece - Episode 1</h2>
+  <p class="info">Adventure • Action • Fantasy</p>
+
+  <div class="controls">
+    <button id="previous">Previous</button>
+    <button id="next">Next Episode</button>
+  </div>
+
+  <h2>Episodes</h2>
+  <div class="episodes" id="episodeList"></div>
+
+  <p class="note">
+    Playback requires an authorized video source.
+  </p>
+
+</main>
+
+<script>
+const episodes = [
+  "Episode 1",
+  "Episode 2",
+  "Episode 3",
+  "Episode 4",
+  "Episode 5",
+  "Episode 6",
+  "Episode 7",
+  "Episode 8"
+];
+
+let currentEpisode = 0;
+
+const title = document.getElementById("episodeTitle");
+const list = document.getElementById("episodeList");
+const player = document.getElementById("videoPlayer");
+const previous = document.getElementById("previous");
+const next = document.getElementById("next");
+
+function showEpisode(index) {
+  currentEpisode = index;
+  title.textContent = "One Piece - " + episodes[index];
+
+  list.innerHTML = "";
+
+  episodes.forEach((episode, i) => {
+    const button = document.createElement("button");
+    button.className = "episode" + (i === index ? " active" : "");
+    button.textContent = episode;
+
+    button.addEventListener("click", () => {
+      showEpisode(i);
+    });
+
+    list.appendChild(button);
+  });
+
+  previous.disabled = index === 0;
+  next.disabled = index === episodes.length - 1;
+
+  player.pause();
+  player.removeAttribute("src");
+  player.load();
+}
+
+previous.addEventListener("click", () => {
+  if (currentEpisode > 0) showEpisode(currentEpisode - 1);
+});
+
+next.addEventListener("click", () => {
+  if (currentEpisode < episodes.length - 1) {
+    showEpisode(currentEpisode + 1);
+  }
+});
+
+showEpisode(0);
+</script>
+
+</body>
+</html>
+
